@@ -6,10 +6,10 @@
     <title>Mundialito SCJ 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Colores Oficiales del Mundial 2026 - ESTILO CLARO */
+            /* Colores Oficiales - Estilo Claro */
             --bg-body: #f0f3f8;
             --bg-card: #ffffff;
             --text-dark: #0f172a;
@@ -105,7 +105,6 @@
             text-transform: uppercase;
         }
 
-        /* ÁREA CENTRAL PRINCIPAL */
         .main-content-layout {
             flex-grow: 1;
             width: 100%;
@@ -115,7 +114,6 @@
             position: relative;
         }
 
-        /* LADO IZQUIERDO: PARTIDO APARTE EXTRA */
         .special-match-aside {
             width: 260px;
             background: rgba(255, 255, 255, 0.6);
@@ -140,7 +138,6 @@
             border-radius: 4px;
         }
 
-        /* CONTENEDOR DEL FIXTURE PRINCIPAL */
         .tournament-wrapper {
             flex-grow: 1;
             padding: 15px 25px;
@@ -181,7 +178,6 @@
             margin-bottom: 2px;
         }
 
-        /* DISEÑO DE CAJAS DE PARTIDOS CLAROS */
         .match-box {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -295,7 +291,6 @@
             color: var(--text-muted);
         }
 
-        /* DECORACIÓN EXTRA DE LA GRAN FINAL */
         .grand-final-box {
             border: 2px solid var(--brand-orange);
             background: linear-gradient(to bottom, #ffffff, #fffaf0);
@@ -323,7 +318,6 @@
             text-transform: uppercase;
         }
 
-        /* FOOTER */
         footer {
             width: 100%;
             text-align: center;
@@ -344,7 +338,7 @@
     <header>
         <div class="logo-area">
             <h1>Mundialito <span>SCJ 2026</span></h1>
-            <p>Fase Final Eliminatoria Oficial Balanceada - Estilo Claro</p>
+            <p>16 Equipos Oficiales - Todo Completamente Mezclado</p>
         </div>
         <div class="rules-bar">
             <div class="rule-item">10 Jugadores</div>
@@ -384,19 +378,17 @@
             <main class="bracket-container">
                 
                 <div class="bracket-column">
-                    <div class="column-header">Ronda Inicial L</div>
-                    <div class="match-box" id="match-ronda1"></div>
-                    <div class="match-box" id="match-ronda2"></div>
-                    <div class="match-box" id="match-ronda3"></div>
-                    <div class="match-box" id="match-ronda4"></div>
-                    <div class="match-box" id="match-ronda5"></div>
+                    <div class="column-header">Octavos</div>
+                    <div class="match-box" id="match-octavos1"></div>
+                    <div class="match-box" id="match-octavos2"></div>
+                    <div class="match-box" id="match-octavos3"></div>
+                    <div class="match-box" id="match-octavos4"></div>
                 </div>
 
                 <div class="bracket-column">
-                    <div class="column-header">Cuartos de Final</div>
+                    <div class="column-header">Cuartos</div>
                     <div class="match-box" id="match-cuartosA"></div>
                     <div class="match-box" id="match-cuartosB"></div>
-                    <div class="match-box" id="match-cuartosC"></div>
                 </div>
 
                 <div class="bracket-column">
@@ -415,19 +407,17 @@
                 </div>
 
                 <div class="bracket-column">
-                    <div class="column-header">Cuartos de Final</div>
+                    <div class="column-header">Cuartos</div>
+                    <div class="match-box" id="match-cuartosC"></div>
                     <div class="match-box" id="match-cuartosD"></div>
-                    <div class="match-box" id="match-cuartosE"></div>
-                    <div class="match-box" id="match-cuartosF"></div>
                 </div>
 
                 <div class="bracket-column">
-                    <div class="column-header">Ronda Inicial R</div>
-                    <div class="match-box" id="match-ronda6"></div>
-                    <div class="match-box" id="match-ronda7"></div>
-                    <div class="match-box" id="match-ronda8"></div>
-                    <div class="match-box" id="match-ronda9"></div>
-                    <div class="match-box" id="match-ronda10"></div>
+                    <div class="column-header">Octavos</div>
+                    <div class="match-box" id="match-octavos5"></div>
+                    <div class="match-box" id="match-octavos6"></div>
+                    <div class="match-box" id="match-octavos7"></div>
+                    <div class="match-box" id="match-octavos8"></div>
                 </div>
 
             </main>
@@ -439,71 +429,62 @@
     </footer>
 
     <script>
-        // DATA DE LOS 20 EQUIPOS TOTALMENTE BALANCEADA Y SIMÉTRICA
+        // TOTALMENTE MEZCLADOS PARA HACERLO INTERESANTE (CABO VERDE Y SUIZA INCLUIDOS)
         const torneoData = {
-            rondaInicial: {
-                ronda1: { id: "R1 - 1.º Básico", equipo1: { nombre: "España (1.º A)", code: "ESP", clasif: "1.ºA" }, equipo2: { nombre: "Países Bajos (2.º A)", code: "NED", clasif: "2.ºA" }, ganador: "" },
-                ronda2: { id: "R2 - 1.º Básico", equipo1: { nombre: "Marruecos (1.º B)", code: "MAR", clasif: "1.ºB" }, equipo2: { nombre: "Inglaterra (1.º D)", code: "ENG", clasif: "1.ºD" }, ganador: "" },
-                ronda3: { id: "R3 - 1.º Básico", equipo1: { nombre: "Suecia (1.º E)", code: "SWE", clasif: "1.ºE" }, equipo2: { nombre: "Suecia (1.º C)", code: "SWE", clasif: "1.ºC" }, ganador: "" },
-                ronda4: { id: "R4 - 2.º Básico", equipo1: { nombre: "Uruguay (2.º E)", code: "URU", clasif: "2.ºE" }, equipo2: { nombre: "Francia (2.º C)", code: "FRA", clasif: "2.ºC" }, ganador: "" },
-                ronda5: { id: "R5 - 2.º Básico", equipo1: { nombre: "México (2.º B)", code: "MEX", clasif: "2.ºB" }, equipo2: { nombre: "Australia (2.º D)", code: "AUS", clasif: "2.ºD" }, ganador: "" },
+            octavos: {
+                octavos1: { id: "Match 01", equipo1: { nombre: "1ero B,C", code: "ARG", clasif: "1" }, equipo2: { nombre: "4to ciencias, magis", code: "EGY", clasif: "8" }, ganador: "" }, // 1ro vs 4to
+                octavos2: { id: "Match 02", equipo1: { nombre: "3ero E,", code: "SUI", clasif: "7" }, equipo2: { nombre: "5to diseño B", code: "ENG", clasif: "13" }, ganador: "" }, // 3ro vs 5to (Suiza)
+                octavos3: { id: "Match 03", equipo1: { nombre: "2do B,C", code: "CPV", clasif: "3" }, equipo2: { nombre: "4to diseño B", code: "JPN", clasif: "11" }, ganador: "" }, // 2do vs 4to (Cabo Verde)
+                octavos4: { id: "Match 04", equipo1: { nombre: "3ero A,B", code: "FRA", clasif: "5" }, equipo2: { nombre: "5to ciencias B", code: "CRO", clasif: "16" }, ganador: "" }, // 3ro vs 5to
                 
-                ronda6: { id: "R6 - 3.º Básico", equipo1: { nombre: "Noruega (3.º A+B)", code: "NOR", clasif: "3.ºAB" }, equipo2: { nombre: "Argentina (3.º E)", code: "ARG", clasif: "3.ºE" }, ganador: "" },
-                ronda7: { id: "R7 - 3.º Básico", equipo1: { nombre: "Estados Unidos (3.º C)", code: "USA", clasif: "3.ºC" }, equipo2: { nombre: "Japón (3.º D)", code: "JPN", clasif: "3.ºD" }, ganador: "" },
-                ronda8: { id: "R8 - Diversificado", equipo1: { nombre: "Colombia (4.º Comp)", code: "COL", clasif: "4.ºA" }, equipo2: { nombre: "Alemania (4.º Dise)", code: "GER", clasif: "4.ºB" }, ganador: "" },
-                ronda9: { id: "R9 - Diversificado", equipo1: { nombre: "Turquía (4.º C+M)", code: "TUR", clasif: "4.ºC" }, equipo2: { nombre: "Portugal (5.º Comp)", code: "POR", clasif: "5.ºA" }, ganador: "" },
-                ronda10:{ id: "R10 - Diversificado", equipo1: { nombre: "Brasil (5.º Dise)", code: "BRA", clasif: "5.ºB" }, equipo2: { nombre: "Croacia (5.º Cien)", code: "CRO", clasif: "5.ºC" }, ganador: "" }
+                octavos5: { id: "Match 05", equipo1: { nombre: "1ero D,E", code: "BRA", clasif: "2" }, equipo2: { nombre: "4to compu", code: "MEX", clasif: "9" }, ganador: "" }, // 1ro vs 4to
+                octavos6: { id: "Match 06", equipo1: { nombre: "3ero C,D", code: "GER", clasif: "6" }, equipo2: { nombre: "5to ciencias A", code: "MAR", clasif: "15" }, ganador: "" }, // 3ro vs 5to
+                
+                // COMPLETAMENTE FIJO: 5to compu vs 5to diseño A
+                octavos7: { id: "Match 07", equipo1: { nombre: "5to compu", code: "POR", clasif: "14" }, equipo2: { nombre: "5to diseño a", code: "COL", clasif: "12" }, ganador: "" }, 
+                
+                octavos8: { id: "Match 08", equipo1: { nombre: "2do D,E", code: "USA", clasif: "4" }, equipo2: { nombre: "4to diseño A", code: "CAN", clasif: "10" }, ganador: "" }  // 2do vs 4to
             },
             cuartos: {
-                cuartosA: { id: "Cuartos A", prov1: "Ganador R1", prov2: "Ganador R2", ganador: "" },
-                cuartosB: { id: "Cuartos B", prov1: "Ganador R3", prov2: "Ganador R4", ganador: "" },
-                cuartosC: { id: "Cuartos C", prov1: "Ganador R5", prov2: "Repechaje L", ganador: "" },
-                cuartosD: { id: "Cuartos D", prov1: "Ganador R6", prov2: "Ganador R7", ganador: "" },
-                cuartosE: { id: "Cuartos E", prov1: "Ganador R8", prov2: "Ganador R9", ganador: "" },
-                cuartosF: { id: "Cuartos F", prov1: "Ganador R10", prov2: "Repechaje R", ganador: "" }
+                cuartosA: { id: "Cuartos A", prov1: "Ganador M01", prov2: "Ganador M02", ganador: "" },
+                cuartosB: { id: "Cuartos B", prov1: "Ganador M03", prov2: "Ganador M04", ganador: "" },
+                cuartosC: { id: "Cuartos C", prov1: "Ganador M05", prov2: "Ganador M06", ganador: "" },
+                cuartosD: { id: "Cuartos D", prov1: "Ganador M07", prov2: "Ganador M08", ganador: "" }
             },
             semifinales: {
-                semiIzq: { id: "Semifinal A", prov1: "Ganador Cuartos A", prov2: "Ganador Cuartos B/C", ganador: "" },
-                semiDer: { id: "Semifinal B", prov1: "Ganador Cuartos D", prov2: "Ganador Cuartos E/F", ganador: "" }
+                semiIzq: { id: "Semifinal L", prov1: "Ganador Cuartos A", prov2: "Ganador Cuartos B", ganador: "" },
+                semiDer: { id: "Semifinal R", prov1: "Ganador Cuartos C", prov2: "Ganador Cuartos D", ganador: "" }
             },
             final: {
-                granFinal: { id: "Final Absoluta", prov1: "Ganador Semi A", prov2: "Ganador Semi B", ganador: "" }
+                granFinal: { id: "Final Absoluta", prov1: "Ganador Semi L", prov2: "Ganador Semi R", ganador: "" }
             }
         };
 
         function procesarEvolucion() {
             const d = torneoData;
             const buscar = (nombre) => {
-                for(let k in d.rondaInicial) {
-                    if(d.rondaInicial[k].equipo1.nombre === nombre) return d.rondaInicial[k].equipo1;
-                    if(d.rondaInicial[k].equipo2.nombre === nombre) return d.rondaInicial[k].equipo2;
+                for(let k in d.octavos) {
+                    if(d.octavos[k].equipo1.nombre === nombre) return d.octavos[k].equipo1;
+                    if(d.octavos[k].equipo2.nombre === nombre) return d.octavos[k].equipo2;
                 }
                 return null;
             };
 
-            // Propagaciones Izquierdas
-            if (d.rondaInicial.ronda1.ganador) d.cuartos.cuartosA.equipo1 = buscar(d.rondaInicial.ronda1.ganador);
-            if (d.rondaInicial.ronda2.ganador) d.cuartos.cuartosA.equipo2 = buscar(d.rondaInicial.ronda2.ganador);
-            if (d.rondaInicial.ronda3.ganador) d.cuartos.cuartosB.equipo1 = buscar(d.rondaInicial.ronda3.ganador);
-            if (d.rondaInicial.ronda4.ganador) d.cuartos.cuartosB.equipo2 = buscar(d.rondaInicial.ronda4.ganador);
-            if (d.rondaInicial.ronda5.ganador) d.cuartos.cuartosC.equipo1 = buscar(d.rondaInicial.ronda5.ganador);
-            if (d.rondaInicial.ronda3.ganador) d.cuartos.cuartosC.equipo2 = buscar(d.rondaInicial.ronda3.ganador);
+            if (d.octavos.octavos1.ganador) d.cuartos.cuartosA.equipo1 = buscar(d.octavos.octavos1.ganador);
+            if (d.octavos.octavos2.ganador) d.cuartos.cuartosA.equipo2 = buscar(d.octavos.octavos2.ganador);
+            if (d.octavos.octavos3.ganador) d.cuartos.cuartosB.equipo1 = buscar(d.octavos.octavos3.ganador);
+            if (d.octavos.octavos4.ganador) d.cuartos.cuartosB.equipo2 = buscar(d.octavos.octavos4.ganador);
 
-            // Propagaciones Derechas
-            if (d.rondaInicial.ronda6.ganador) d.cuartos.cuartosD.equipo1 = buscar(d.rondaInicial.ronda6.ganador);
-            if (d.rondaInicial.ronda7.ganador) d.cuartos.cuartosD.equipo2 = buscar(d.rondaInicial.ronda7.ganador);
-            if (d.rondaInicial.ronda8.ganador) d.cuartos.cuartosE.equipo1 = buscar(d.rondaInicial.ronda8.ganador);
-            if (d.rondaInicial.ronda9.ganador) d.cuartos.cuartosE.equipo2 = buscar(d.rondaInicial.ronda9.ganador);
-            if (d.rondaInicial.ronda10.ganador) d.cuartos.cuartosF.equipo1 = buscar(d.rondaInicial.ronda10.ganador);
-            if (d.rondaInicial.ronda8.ganador) d.cuartos.cuartosF.equipo2 = buscar(d.rondaInicial.ronda8.ganador);
+            if (d.octavos.octavos5.ganador) d.cuartos.cuartosC.equipo1 = buscar(d.octavos.octavos5.ganador);
+            if (d.octavos.octavos6.ganador) d.cuartos.cuartosC.equipo2 = buscar(d.octavos.octavos6.ganador);
+            if (d.octavos.octavos7.ganador) d.cuartos.cuartosD.equipo1 = buscar(d.octavos.octavos7.ganador);
+            if (d.octavos.octavos8.ganador) d.cuartos.cuartosD.equipo2 = buscar(d.octavos.octavos8.ganador);
 
-            // Semifinales
             if (d.cuartos.cuartosA.ganador) d.semifinales.semiIzq.equipo1 = buscar(d.cuartos.cuartosA.ganador);
             if (d.cuartos.cuartosB.ganador) d.semifinales.semiIzq.equipo2 = buscar(d.cuartos.cuartosB.ganador);
-            if (d.cuartos.cuartosD.ganador) d.semifinales.semiDer.equipo1 = buscar(d.cuartos.cuartosD.ganador);
-            if (d.cuartos.cuartosE.ganador) d.semifinales.semiDer.equipo2 = buscar(d.cuartos.cuartosE.ganador);
+            if (d.cuartos.cuartosC.ganador) d.semifinales.semiDer.equipo1 = buscar(d.cuartos.cuartosC.ganador);
+            if (d.cuartos.cuartosD.ganador) d.semifinales.semiDer.equipo2 = buscar(d.cuartos.cuartosD.ganador);
 
-            // Final
             if (d.semifinales.semiIzq.ganador) d.final.granFinal.equipo1 = buscar(d.semifinales.semiIzq.ganador);
             if (d.semifinales.semiDer.ganador) d.final.granFinal.equipo2 = buscar(d.semifinales.semiDer.ganador);
         }
@@ -519,7 +500,7 @@
                         <div class="team-badge-ui">${equipo.code}</div>
                         <span>${equipo.nombre}</span>
                     </div>
-                    <span class="team-rank">${equipo.clasif}</span>
+                    <span class="team-rank">N°.${equipo.clasif}</span>
                 </div>
             `;
         }
@@ -528,8 +509,8 @@
             const box = document.getElementById(idDom);
             if (!box) return;
 
-            const f1 = construirFilaHTML(partido.equipo1, partido.ganador, partido.prov1 || "Clasificado");
-            const f2 = construirFilaHTML(partido.equipo2, partido.ganador, partido.prov2 || "Clasificado");
+            const f1 = construirFilaHTML(partido.equipo1, partido.ganador, partido.prov1 || "Por definir");
+            const f2 = construirFilaHTML(partido.equipo2, partido.ganador, partido.prov2 || "Por definir");
 
             let banner = (idDom === 'match-granFinal' && partido.ganador) ? `<div class="champion-banner" style="display:block;">¡CAMPEÓN: ${partido.ganador.toUpperCase()}!</div>` : "";
 
@@ -537,7 +518,7 @@
                 <div class="match-header">
                     <span>${partido.id}</span>
                     <span style="color: ${partido.ganador ? 'var(--brand-green)' : 'var(--text-muted)'}; font-weight: bold;">
-                        ${partido.ganador ? 'FIN' : 'PENDIENTE'}
+                        ${partido.ganador ? 'FIN' : 'PRÓXIMO'}
                     </span>
                 </div>
                 ${f1} ${f2} ${banner}
@@ -546,7 +527,7 @@
 
         function inicializarArbol() {
             procesarEvolucion();
-            for (let k in torneoData.rondaInicial) dibujarPartido(`match-${k}`, torneoData.rondaInicial[k]);
+            for (let k in torneoData.octavos) dibujarPartido(`match-${k}`, torneoData.octavos[k]);
             for (let k in torneoData.cuartos) dibujarPartido(`match-${k}`, torneoData.cuartos[k]);
             for (let k in torneoData.semifinales) dibujarPartido(`match-${k}`, torneoData.semifinales[k]);
             for (let k in torneoData.final) dibujarPartido(`match-${k}`, torneoData.final[k]);
