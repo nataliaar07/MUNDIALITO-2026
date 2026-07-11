@@ -54,6 +54,7 @@
             flex-shrink: 0;
             border-bottom: 5px solid var(--brand-pink);
             position: relative;
+            z-index: 10;
         }
 
         header::after {
@@ -114,15 +115,18 @@
             position: relative;
         }
 
+        /* PARTIDO DE EXHIBICIÓN MASCULINO - RESPONSIVO */
         .special-match-aside {
             width: 260px;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.95);
             border-right: 1px solid var(--border-color);
             padding: 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             flex-shrink: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 100;
         }
 
         .special-title {
@@ -136,6 +140,43 @@
             background: rgba(255, 0, 127, 0.1);
             padding: 6px;
             border-radius: 4px;
+            position: relative;
+        }
+
+        /* Botón para cerrar en celular */
+        .close-aside-btn {
+            display: none;
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        /* BOTÓN FLOTANTE PARA CELULAR */
+        .mobile-trigger-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--brand-purple), var(--brand-pink));
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(92, 6, 140, 0.4);
+            z-index: 105;
+            cursor: pointer;
+            letter-spacing: 1px;
         }
 
         .tournament-wrapper {
@@ -143,8 +184,7 @@
             padding: 15px 25px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            overflow-x: auto;
+            overflow: auto;
         }
 
         .bracket-container {
@@ -152,8 +192,7 @@
             grid-template-columns: 240px 240px 240px 280px 240px 240px 240px;
             gap: 12px;
             align-items: center;
-            width: 100%;
-            max-width: 1800px;
+            width: max-content;
             height: 100%;
         }
 
@@ -331,6 +370,44 @@
             border-top: 3px solid var(--brand-green);
             flex-shrink: 0;
         }
+
+        /* MEDIA QUERY: AJUSTES ESPECÍFICOS PARA DISPOSITIVOS MÓVILES */
+        @media (max-width: 900px) {
+            .rules-bar {
+                display: none; /* Oculta reglas arriba para ganar espacio */
+            }
+
+            /* Convertimos el panel izquierdo en una tarjeta desplegable desde abajo */
+            .special-match-aside {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                border-right: none;
+                border-top: 4px solid var(--brand-pink);
+                border-radius: 16px 16px 0 0;
+                box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            .special-match-aside.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .close-aside-btn {
+                display: block;
+            }
+
+            .mobile-trigger-btn {
+                display: block;
+            }
+            
+            .tournament-wrapper {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -350,8 +427,11 @@
 
     <div class="main-content-layout">
         
-        <aside class="special-match-aside">
-            <div class="special-title">Showcase Match Masculino</div>
+        <aside class="special-match-aside" id="specialAside">
+            <div class="special-title">
+                Showcase Match Masculino
+                <button class="close-aside-btn" onclick="toggleMobileAside()">×</button>
+            </div>
             <div class="match-box" style="border-color: var(--brand-purple);">
                 <div class="match-header">
                     <span>Especial Varones</span>
@@ -373,6 +453,8 @@
                 </div>
             </div>
         </aside>
+
+        <button class="mobile-trigger-btn" onclick="toggleMobileAside()">Ver Partido Masculino</button>
 
         <div class="tournament-wrapper">
             <main class="bracket-container">
@@ -429,21 +511,24 @@
     </footer>
 
     <script>
-        // TOTALMENTE MEZCLADOS PARA HACERLO INTERESANTE (CABO VERDE Y SUIZA INCLUIDOS)
+        // Función interactiva para abrir y cerrar el menú en celulares
+        function toggleMobileAside() {
+            const aside = document.getElementById('specialAside');
+            aside.classList.toggle('active');
+        }
+
+        // Base de datos de partidos estructurada de forma idéntica
         const torneoData = {
             octavos: {
-                octavos1: { id: "Match 01", equipo1: { nombre: "1ero B,C", code: "ARG", clasif: "1" }, equipo2: { nombre: "4to ciencias, magis", code: "EGY", clasif: "8" }, ganador: "" }, // 1ro vs 4to
-                octavos2: { id: "Match 02", equipo1: { nombre: "3ero E,", code: "SUI", clasif: "7" }, equipo2: { nombre: "5to diseño B", code: "ENG", clasif: "13" }, ganador: "" }, // 3ro vs 5to (Suiza)
-                octavos3: { id: "Match 03", equipo1: { nombre: "2do B,C", code: "CPV", clasif: "3" }, equipo2: { nombre: "4to diseño B", code: "JPN", clasif: "11" }, ganador: "" }, // 2do vs 4to (Cabo Verde)
-                octavos4: { id: "Match 04", equipo1: { nombre: "3ero A,B", code: "FRA", clasif: "5" }, equipo2: { nombre: "5to ciencias B", code: "CRO", clasif: "16" }, ganador: "" }, // 3ro vs 5to
+                octavos1: { id: "Match 01", equipo1: { nombre: "1ero B,C", code: "ARG", clasif: "1" }, equipo2: { nombre: "4to ciencias, magis", code: "EGY", clasif: "8" }, ganador: "" },
+                octavos2: { id: "Match 02", equipo1: { nombre: "3ero E,", code: "SUI", clasif: "7" }, equipo2: { nombre: "5to diseño B", code: "ENG", clasif: "13" }, ganador: "" },
+                octavos3: { id: "Match 03", equipo1: { nombre: "2do B,C", code: "CPV", clasif: "3" }, equipo2: { nombre: "4to diseño B", code: "JPN", clasif: "11" }, ganador: "" },
+                octavos4: { id: "Match 04", equipo1: { nombre: "3ero A,B", code: "FRA", clasif: "5" }, equipo2: { nombre: "5to ciencias B", code: "CRO", clasif: "16" }, ganador: "" },
                 
-                octavos5: { id: "Match 05", equipo1: { nombre: "1ero D,E", code: "BRA", clasif: "2" }, equipo2: { nombre: "4to compu", code: "MEX", clasif: "9" }, ganador: "" }, // 1ro vs 4to
-                octavos6: { id: "Match 06", equipo1: { nombre: "3ero C,D", code: "GER", clasif: "6" }, equipo2: { nombre: "5to ciencias A", code: "MAR", clasif: "15" }, ganador: "" }, // 3ro vs 5to
-                
-                // COMPLETAMENTE FIJO: 5to compu vs 5to diseño A
+                octavos5: { id: "Match 05", equipo1: { nombre: "1ero D,E", code: "BRA", clasif: "2" }, equipo2: { nombre: "4to compu", code: "MEX", clasif: "9" }, ganador: "" },
+                octavos6: { id: "Match 06", equipo1: { nombre: "3ero C,D", code: "GER", clasif: "6" }, equipo2: { nombre: "5to ciencias A", code: "MAR", clasif: "15" }, ganador: "" },
                 octavos7: { id: "Match 07", equipo1: { nombre: "5to compu", code: "POR", clasif: "14" }, equipo2: { nombre: "5to diseño a", code: "COL", clasif: "12" }, ganador: "" }, 
-                
-                octavos8: { id: "Match 08", equipo1: { nombre: "2do D,E", code: "USA", clasif: "4" }, equipo2: { nombre: "4to diseño A", code: "CAN", clasif: "10" }, ganador: "" }  // 2do vs 4to
+                octavos8: { id: "Match 08", equipo1: { nombre: "2do D,E", code: "USA", clasif: "4" }, equipo2: { nombre: "4to diseño A", code: "CAN", clasif: "10" }, ganador: "" }
             },
             cuartos: {
                 cuartosA: { id: "Cuartos A", prov1: "Ganador M01", prov2: "Ganador M02", ganador: "" },
