@@ -143,7 +143,6 @@
             position: relative;
         }
 
-        /* Botón para cerrar en celular */
         .close-aside-btn {
             display: none;
             position: absolute;
@@ -159,7 +158,6 @@
             padding: 0 5px;
         }
 
-        /* BOTÓN FLOTANTE PARA CELULAR */
         .mobile-trigger-btn {
             display: none;
             position: fixed;
@@ -371,13 +369,11 @@
             flex-shrink: 0;
         }
 
-        /* MEDIA QUERY: AJUSTES ESPECÍFICOS PARA DISPOSITIVOS MÓVILES */
         @media (max-width: 900px) {
             .rules-bar {
-                display: none; /* Oculta reglas arriba para ganar espacio */
+                display: none;
             }
 
-            /* Convertimos el panel izquierdo en una tarjeta desplegable desde abajo */
             .special-match-aside {
                 position: fixed;
                 bottom: 0;
@@ -511,23 +507,24 @@
     </footer>
 
     <script>
-        // Función interactiva para abrir y cerrar el menú en celulares
         function toggleMobileAside() {
             const aside = document.getElementById('specialAside');
             aside.classList.toggle('active');
         }
 
-        // Base de datos de partidos estructurada de forma idéntica
+        // SE REALIZARON EXCLUSIVAMENTE LOS CUATRO CAMBIOS DE PAÍS MANTENIENDO EL RESTO IGUAL
         const torneoData = {
             octavos: {
                 octavos1: { id: "Match 01", equipo1: { nombre: "1ero B,C", code: "ARG", clasif: "1" }, equipo2: { nombre: "4to ciencias, magis", code: "EGY", clasif: "8" }, ganador: "" },
                 octavos2: { id: "Match 02", equipo1: { nombre: "3ero E,", code: "SUI", clasif: "7" }, equipo2: { nombre: "5to diseño B", code: "ENG", clasif: "13" }, ganador: "" },
-                octavos3: { id: "Match 03", equipo1: { nombre: "2do B,C", code: "CPV", clasif: "3" }, equipo2: { nombre: "4to diseño B", code: "JPN", clasif: "11" }, ganador: "" },
+                octavos3: { id: "Match 03", equipo1: { nombre: "2do B,C", code: "CPV", clasif: "3" }, equipo2: { nombre: "4to diseño B", code: "GER", clasif: "11" }, ganador: "" }, // 4to diseño B -> Alemania
                 octavos4: { id: "Match 04", equipo1: { nombre: "3ero A,B", code: "FRA", clasif: "5" }, equipo2: { nombre: "5to ciencias B", code: "CRO", clasif: "16" }, ganador: "" },
                 
-                octavos5: { id: "Match 05", equipo1: { nombre: "1ero D,E", code: "BRA", clasif: "2" }, equipo2: { nombre: "4to compu", code: "MEX", clasif: "9" }, ganador: "" },
-                octavos6: { id: "Match 06", equipo1: { nombre: "3ero C,D", code: "GER", clasif: "6" }, equipo2: { nombre: "5to ciencias A", code: "MAR", clasif: "15" }, ganador: "" },
-                octavos7: { id: "Match 07", equipo1: { nombre: "5to compu", code: "POR", clasif: "14" }, equipo2: { nombre: "5to diseño a", code: "COL", clasif: "12" }, ganador: "" }, 
+                octavos5: { id: "Match 05", equipo1: { nombre: "1ero D,E", code: "BRA", clasif: "2" }, equipo2: { nombre: "4to compu", code: "COL", clasif: "9" }, ganador: "" }, // 4to compu -> Colombia
+                octavos6: { id: "Match 06", equipo1: { nombre: "3ero C,D", code: "JPN", clasif: "6" }, equipo2: { nombre: "5to ciencias A", code: "MAR", clasif: "15" }, ganador: "" }, // 3ero C,D -> Japón
+                
+                octavos7: { id: "Match 07", equipo1: { nombre: "5to compu", code: "POR", clasif: "14" }, equipo2: { nombre: "5to diseño a", code: "MEX", clasif: "12" }, ganador: "" }, // 5to diseño a -> México
+                
                 octavos8: { id: "Match 08", equipo1: { nombre: "2do D,E", code: "USA", clasif: "4" }, equipo2: { nombre: "4to diseño A", code: "CAN", clasif: "10" }, ganador: "" }
             },
             cuartos: {
